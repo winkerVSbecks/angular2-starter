@@ -33,4 +33,16 @@ module.exports = {
       context: path.resolve(__dirname, 'src'),
     }),
   ],
+
+  module: {
+    rules: [{ // ships in ES6 format now
+      test: /\.js$/,
+      loader: 'babel-loader',
+      include: /angular/,
+      exclude: /node_modules/,
+      query: {
+        compact: false,
+      },
+    }],
+  },
 };

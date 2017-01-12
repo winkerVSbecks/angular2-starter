@@ -33,7 +33,7 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
   },
 
-  plugins: plugins,/*.concat([
+  plugins: plugins.concat([
     new webpack.DllReferencePlugin({
       context: '.',
       manifest: require('./dist/polyfills-manifest.json'),
@@ -42,7 +42,7 @@ module.exports = {
       context: '.',
       manifest: require('./dist/vendor-manifest.json'),
     }),
-  ]),*/
+  ]),
 
   devServer: {
     historyApiFallback: { index: '/' },
