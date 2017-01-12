@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const webpack = require('webpack');
 const loaders = require('./webpack/loaders');
 const plugins = require('./webpack/plugins');
 const ENV = process.env.npm_lifecycle_event;
@@ -11,10 +12,6 @@ if (JiT) {
 module.exports = {
   entry: {
     app: './src/main.ts',
-    // and vendor files separate
-    vendor: [
-      './src/vendor.ts',
-    ],
   },
 
   output: {
@@ -36,7 +33,16 @@ module.exports = {
     extensions: ['.webpack.js', '.web.js', '.ts', '.js'],
   },
 
-  plugins: plugins,
+  plugins: plugins,/*.concat([
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('./dist/polyfills-manifest.json'),
+    }),
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('./dist/vendor-manifest.json'),
+    }),
+  ]),*/
 
   devServer: {
     historyApiFallback: { index: '/' },
